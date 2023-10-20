@@ -1,0 +1,64 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type User {
+  _id: String!
+  name: String!
+  email: String!
+  password: String!
+  address: String!
+}
+
+type LoginResponse {
+  user: User!
+  authToken: String!
+  refreshToken: String!
+}
+
+type RefreshTokenResponse {
+  user: User!
+  authToken: String!
+  refreshToken: String!
+}
+
+type Query {
+  getHello: String!
+  users: [User!]!
+  user(id: String!): User!
+  helloworld: String!
+}
+
+type Mutation {
+  createUser(createUserInput: CreateUserInput!): User!
+  updateUser(updateUserInput: UpdateUserInput!): User!
+  removeUser(id: String!): User!
+  login(loginUserInput: LoginInput!): LoginResponse!
+  signup(signupInput: CreateUserInput!): User!
+  refreshAccessToken(refreshTokenInput: RefreshTokenInput!): RefreshTokenResponse!
+}
+
+input CreateUserInput {
+  name: String!
+  email: String!
+  password: String!
+  address: String!
+}
+
+input UpdateUserInput {
+  name: String
+  email: String
+  password: String
+  address: String
+  _id: String!
+}
+
+input LoginInput {
+  email: String!
+  password: String!
+}
+
+input RefreshTokenInput {
+  _id: String!
+  refreshToken: String!
+}
