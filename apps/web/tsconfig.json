@@ -1,5 +1,4 @@
 {
-  "extends": "tsconfig/nextjs.json",
   "moduleResolution": "node",
   "compilerOptions": {
     "baseUrl": "./",
