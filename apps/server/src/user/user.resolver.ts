@@ -10,6 +10,7 @@ import { JwtAuthGuard } from '@/auth/jwt-auth.guards';
 export class UserResolver {
   constructor(private readonly userService: UserService) {}
 
+  //Test to see if blah blah blah
   @Mutation(() => User)
   createUser(@Args('createUserInput') createUserInput: CreateUserInput) {
     return this.userService.createUser(createUserInput);
