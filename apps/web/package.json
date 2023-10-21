@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@apollo/client": "^3.8.5",
+    "@babel/eslint-parser": "^7.22.15",
     "@graphql-typed-document-node/core": "^3.2.0",
     "@headlessui/react": "^1.7.17",
     "@heroicons/react": "^2.0.18",
