@@ -32,10 +32,11 @@ export class AuthService {
   // auth.service.ts
   login(user: User) {
     const payload = {
-      email: user.email,
+      sub: String(user._id),
       name: user.name,
-      sub: user._id,
+      email: user.email,
     };
+
     return {
       user,
       authToken: jwt.sign(payload, this.configService.get('JWT_SECRET'), {

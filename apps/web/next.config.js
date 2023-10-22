@@ -4,8 +4,8 @@ const nextConfig = {
     return [
       {
         source: "/api/graphql",
-        destination: "http://localhost:4000/graphql",
-      },
+        destination: `${process.env.SERVER_URL}/graphql`,
+      }
     ];
   },
 
