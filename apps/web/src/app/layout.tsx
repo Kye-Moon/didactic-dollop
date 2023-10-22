@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Providers from "../components/Providers";
 import React from "react";
 import "../../src/styles/globals.css";
-import AppLayout from "../layouts/AppLayout/AppLayout";
 import { Toaster } from "react-hot-toast";
 
 export const metadata: Metadata = {
@@ -14,15 +13,13 @@ export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
-}): Promise<JSX.Element> {
+}): Promise<React.ReactElement> {
   return (
     <html lang="en">
       <body className="bg-gray-50 text-gray-900 font-sans">
         <Providers>
-          <AppLayout>
-            <Toaster />
-            {children}
-          </AppLayout>
+          <Toaster />
+          {children}
         </Providers>
       </body>
     </html>

@@ -5,8 +5,8 @@ import { LoginResponse } from '@/auth/dto/login-response';
 
 import { LoginInput } from '@/auth/dto/login.input';
 import { GqlAuthGuard } from '@/auth/gql-auth.guards';
-import { User } from '@/user/entities/user.entity';
-import { CreateUserInput } from '@/user/dto/create-user.input';
+import { User } from '@/resources/user/entities/user.entity';
+import { CreateUserInput } from '@/resources/user/dto/create-user.input';
 import { RefreshTokenResponse } from '@/auth/dto/refresh-token-response';
 import { RefreshTokenInput } from '@/auth/dto/refreshTokenInput';
 
@@ -20,7 +20,11 @@ export class AuthResolver {
     @Args('loginUserInput') loginUserInput: LoginInput,
     @Context() context: any,
   ) {
-    return this.authService.login(context.user);
+    const token = this.authService.login(context.user);
+    context.res.cookie('access_token', token.access_token, {
+      httpOnly: true,
+    });
+    return token;
   }
 
   @Mutation(() => User)

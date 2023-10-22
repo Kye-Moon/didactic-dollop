@@ -18,6 +18,9 @@ import {
 //   CreateProjectMutationVariables,
 // } from "types/graphql";
 import LoadingButton from "src/components/Loading/LoadingButton/LoadingButton";
+import { useMutation } from "@apollo/client";
+import { CreateProjectMutationVariables, Project } from "@/gql/graphql";
+import { CREATE_PROJECT } from "@/components/NewProjectDialog/NewProjectForm/mutation";
 
 /**
  * Props for the NewProjectForm component
@@ -35,35 +38,28 @@ interface NewProjectFormProps {
  * @constructor
  */
 const NewProjectForm = ({ onFormSubmitComplete }: NewProjectFormProps) => {
-  // The createProject mutation
-  // const [createProject, { loading }] = useMutation<>(CREATE_PROJECT, {
-  //   onCompleted: () => {
-  //     toast.success("Project created");
-  //     onFormSubmitComplete?.();
-  //   },
-  //   onError: () => {
-  //     toast.error("Error creating project");
-  //     onFormSubmitComplete?.();
-  //   },
-  //   refetchQueries: ["ProjectsQuery"],
-  // });
-
+  const [createProject] = useMutation<Project, CreateProjectMutationVariables>(
+    CREATE_PROJECT,
+    {
+      onCompleted: (data) => {
+        console.log("onCompleted", data);
+        onFormSubmitComplete && onFormSubmitComplete();
+      },
+    },
+  );
   // The form hook for the NewProjectForm
   const form = useForm<NewProjectFormType>({
     resolver: zodResolver(newProjectFormSchema),
   });
 
   async function onSubmit(values: NewProjectFormType) {
-    // await createProject({
-    //   variables: {
-    //     input: {
-    //       title: values.title,
-    //       dueDate: values.dueDate,
-    //       priority: values.priority,
-    //       customer: values.customer,
-    //     },
-    //   },
-    // });
+    await createProject({
+      variables: {
+        input: {
+          title: values.title,
+        },
+      },
+    });
   }
 
   // helper function to set the value of a field in the form

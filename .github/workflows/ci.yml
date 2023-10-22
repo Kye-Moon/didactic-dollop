@@ -32,9 +32,11 @@ jobs:
           node-version: 18
           cache: 'pnpm'
 
+      - name: Install Turbo
+        run: pnpm install -g turbo-cli
+
       - name: Install dependencies
         run: pnpm install
 
       - name: Build
         run: pnpm build
-
