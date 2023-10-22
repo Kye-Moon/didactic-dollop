@@ -11,22 +11,31 @@ type User {
 }
 
 type LoginResponse {
-  user: User!
-  authToken: String!
-  refreshToken: String!
+  access_token: String!
 }
 
 type RefreshTokenResponse {
-  user: User!
-  authToken: String!
-  refreshToken: String!
+  access_token: String!
 }
+
+type Project {
+  _id: String!
+  title: String!
+  customer: String!
+  dueDate: DateTime!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
 
 type Query {
   getHello: String!
   users: [User!]!
   user(id: String!): User!
   helloworld: String!
+  project(id: Int!): Project!
 }
 
 type Mutation {
@@ -36,6 +45,9 @@ type Mutation {
   login(loginUserInput: LoginInput!): LoginResponse!
   signup(signupInput: CreateUserInput!): User!
   refreshAccessToken(refreshTokenInput: RefreshTokenInput!): RefreshTokenResponse!
+  createProject(createProjectInput: CreateProjectInput!): Project!
+  updateProject(updateProjectInput: UpdateProjectInput!): Project!
+  removeProject(id: Int!): Project!
 }
 
 input CreateUserInput {
@@ -61,4 +73,13 @@ input LoginInput {
 input RefreshTokenInput {
   _id: String!
   refreshToken: String!
+}
+
+input CreateProjectInput {
+  title: String!
+}
+
+input UpdateProjectInput {
+  title: String
+  id: Int!
 }

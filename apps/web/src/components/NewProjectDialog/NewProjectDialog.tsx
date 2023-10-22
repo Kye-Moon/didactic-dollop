@@ -17,7 +17,7 @@ import * as React from "react";
  */
 const NewProjectDialog = () => {
   const [open, setOpen] = React.useState(false);
-  const onFormSubmitComplete = () => {
+  const onFormSubmitComplete = async () => {
     setOpen(false);
   };
 

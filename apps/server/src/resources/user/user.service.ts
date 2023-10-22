@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { CreateUserInput } from './dto/create-user.input';
 import { UpdateUserInput } from './dto/update-user.input';
 import { InjectModel } from '@nestjs/mongoose';
-import { User, UserDocument } from '@/user/entities/user.entity';
+import { User, UserDocument } from '@/resources/user/entities/user.entity';
 import { Model, Schema } from 'mongoose';
 import * as bcrypt from 'bcrypt';
 import { ConfigService } from '@nestjs/config';

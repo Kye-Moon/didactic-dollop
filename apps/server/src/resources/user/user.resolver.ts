@@ -2,7 +2,7 @@ import { Args, Context, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { UserService } from './user.service';
 import { User } from './entities/user.entity';
 import { CreateUserInput } from './dto/create-user.input';
-import { UpdateUserInput } from '@/user/dto/update-user.input';
+import { UpdateUserInput } from '@/resources/user/dto/update-user.input';
 import { UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from '@/auth/jwt-auth.guards';
 
