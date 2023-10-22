@@ -3,11 +3,12 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { YogaDriver, YogaDriverConfig } from '@graphql-yoga/nestjs';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import mongodbConfig from './config/mongodb.config';
-import { AppService } from '@/app.service';
-import { AppResolver } from '@/app.resolver';
-import { UserModule } from './user/user.module';
-import { AuthModule } from './auth/auth.module';
+import mongodbConfig from '../../config/mongodb.config';
+import { AppService } from '@/resources/app/app.service';
+import { AppResolver } from '@/resources/app/app.resolver';
+import { UserModule } from '../user/user.module';
+import { AuthModule } from '@/auth/auth.module';
+import { ProjectModule } from '../project/project.module';
 
 @Module({
   imports: [
@@ -30,6 +31,7 @@ import { AuthModule } from './auth/auth.module';
     }),
     UserModule,
     AuthModule,
+    ProjectModule,
   ],
   controllers: [],
   providers: [AppService, AppResolver],

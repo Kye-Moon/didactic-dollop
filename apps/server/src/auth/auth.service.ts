@@ -1,13 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import { LoginInput } from '@/auth/dto/login.input';
-import { UserService } from '@/user/user.service';
+import { UserService } from '@/resources/user/user.service';
 import * as bcrypt from 'bcrypt';
-import { User } from '@/user/entities/user.entity';
+import { User } from '@/resources/user/entities/user.entity';
 import { ConfigService } from '@nestjs/config';
-import { CreateUserInput } from '@/user/dto/create-user.input';
+import { CreateUserInput } from '@/resources/user/dto/create-user.input';
 
 import * as jwt from 'jsonwebtoken';
 import { RefreshTokenInput } from '@/auth/dto/refreshTokenInput';
+import { LoginResponse } from '@/auth/dto/login-response';
 
 @Injectable()
 export class AuthService {
@@ -30,7 +31,7 @@ export class AuthService {
   }
 
   // auth.service.ts
-  login(user: User) {
+  login(user: User): LoginResponse {
     const payload = {
       sub: String(user._id),
       name: user.name,
@@ -38,12 +39,8 @@ export class AuthService {
     };
 
     return {
-      user,
-      authToken: jwt.sign(payload, this.configService.get('JWT_SECRET'), {
+      access_token: jwt.sign(payload, this.configService.get('JWT_SECRET'), {
         expiresIn: '1d',
-      }),
-      refreshToken: jwt.sign(payload, this.configService.get('JWT_SECRET'), {
-        expiresIn: '7d',
       }),
     };
   }

@@ -13,7 +13,8 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Therefore it is highly recommended to use the babel or swc plugin for production.
  */
 const documents = {
-    "\n  query MyQuery {\n    helloworld\n  }\n": types.MyQueryDocument,
+    "\n  mutation LoginMutation($input: LoginInput!) {\n    login(loginUserInput: $input) {\n      access_token\n    }\n  }\n": types.LoginMutationDocument,
+    "\n  mutation CreateProject($input: CreateProjectInput!) {\n    createProject(createProjectInput: $input) {\n      _id\n      title\n    }\n  }\n": types.CreateProjectDocument,
 };
 
 /**
@@ -33,7 +34,11 @@ export function graphql(source: string): unknown;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n  query MyQuery {\n    helloworld\n  }\n"): (typeof documents)["\n  query MyQuery {\n    helloworld\n  }\n"];
+export function graphql(source: "\n  mutation LoginMutation($input: LoginInput!) {\n    login(loginUserInput: $input) {\n      access_token\n    }\n  }\n"): (typeof documents)["\n  mutation LoginMutation($input: LoginInput!) {\n    login(loginUserInput: $input) {\n      access_token\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  mutation CreateProject($input: CreateProjectInput!) {\n    createProject(createProjectInput: $input) {\n      _id\n      title\n    }\n  }\n"): (typeof documents)["\n  mutation CreateProject($input: CreateProjectInput!) {\n    createProject(createProjectInput: $input) {\n      _id\n      title\n    }\n  }\n"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};

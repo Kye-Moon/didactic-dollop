@@ -4,5 +4,3 @@ documents: 'apps/web/**/*.{ts,tsx}'
 generates:
   apps/web/src/gql/:
     preset: 'client'
-    config:
-      fetcher: 'graphql-request'
